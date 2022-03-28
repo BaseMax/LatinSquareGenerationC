@@ -8,7 +8,7 @@ typedef struct {
 	int** data;
 } mymatrix;
 
-void reverse(int arr[], int size)
+void reverse(int *arr, int size)
 {
     for (int i = 0; i < size/2; i++)
     {
@@ -35,7 +35,7 @@ int* balancedLatinSquare(int* members, int size, int participantId) {
 	}
 
 	if(size % 2 != 0 && participantId % 2 != 0)
-		reverse(result);
+		reverse(result, size);
 	return result;
 }
 
@@ -108,9 +108,9 @@ mymatrix* generateDefaultLatinSquare(int size)
 		int *conditions = malloc(sizeof(int) * size + 1);
 		for(int i = 1; i<= size; i++) {
 			conditions[i-1] = i;
-			lSquare->data[0][i] = i;
+			lSquare->data[0][i-1] = i;
 		}
-		for(int r = 1; r < size; r++) {
+		for(int r = 0; r < size; r++) {
 			lSquare->data[r] = balancedLatinSquare(conditions, size, r);
 		}
 	}
@@ -132,21 +132,8 @@ void display(mymatrix *m)
 
 int main()
 {
-	srand(time(NULL));
 	const int SIZE = 4; // 10;
 	mymatrix *m = generateDefaultLatinSquare(SIZE);
 	display(m);
-	// [
-	//   [ 3,  6, 2, 1, 7, 5, 10, 4, 9, 8 ],
-	//   [ 4, 8, 9, 7, 5, 10, 2, 6, 3, 1 ],
-	//   [ 7, 9, 4, 8,  1, 6, 3, 5, 2, 10 ],
-	//   [ 6, 7, 1,  5, 8, 9, 4, 2, 10, 3 ],
-	//   [ 10, 3, 6, 2, 9,  4, 8, 1, 5, 7 ],
-	//   [ 2, 10, 8, 3, 4, 7,  1, 9, 6, 5 ],
-	//   [ 9, 5,  7, 4, 3, 8, 6, 10, 1, 2 ],
-	//   [ 5, 2, 3, 10, 6, 1, 7, 8,  4, 9 ],
-	//   [ 8, 1, 5, 6, 10, 2, 9, 3, 7,  4 ],
-	//   [ 1, 4, 10, 9, 2, 3, 5,  7, 8, 6 ]
-	// ]
 	return 0;
 }
