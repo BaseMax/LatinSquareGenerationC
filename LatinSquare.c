@@ -82,11 +82,8 @@ void display(mymatrix *m)
 	printf("[\n");
 	for(int y=0; y < m->y; y++) {
 		printf("\t[ ");
-		for(int x=0; x < m->x; x++)
-			printf("%d, ", m->data[y][x]);
-			// printf("%d\t", m->data[y][x]);
+		for(int x=0; x < m->x; x++) printf("%d, ", m->data[y][x]);
 		printf("\t],\n");
-		// printf("\n");
 	}
 	printf("]\n");
 }
@@ -94,8 +91,7 @@ void display(mymatrix *m)
 void display_tab(mymatrix *m)
 {
 	for(int y=0; y < m->y; y++) {
-		for(int x=0; x < m->x; x++)
-			printf("%d\t", m->data[y][x]);
+		for(int x=0; x < m->x; x++) printf("%d\t", m->data[y][x]);
 		printf("\n");
 	}
 }
