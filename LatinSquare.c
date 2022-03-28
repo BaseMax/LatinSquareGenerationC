@@ -71,6 +71,7 @@ mymatrix* latinSquare(int size)
 			conditions[i-1] = i;
 		lSquare->data[0] = conditions;
 		for(int r = 0; r < size; r++) {
+			if(size > 100) printf("%d/%d\n", r+1, size);
 			lSquare->data[r] = balance(conditions, size, r);
 		}
 	}
@@ -91,12 +92,33 @@ void display(mymatrix *m)
 	// printf("]\n");
 }
 
+void save(mymatrix *m)
+{
+	// create "latinSquare.csv" file
+	FILE *fp = fopen("latinSquare.csv", "w");
+	if(fp == NULL) {
+		printf("Error creating file!\n");
+		exit(1);
+	}
+
+	// write data to file
+	for(int y=0; y < m->y; y++) {
+		for(int x=0; x < m->x; x++)
+			fprintf(fp, "%d,", m->data[y][x]);
+		fprintf(fp, "\n");
+	}
+
+	// close file
+	fclose(fp);
+}
+
 int main(int argc, char** argv)
 {
 	int size = 10; // 1073741824;
 	if(argc > 1) sscanf(argv[1], "%d", &size);
 	mymatrix *m = latinSquare(size);
-	display(m);
+	if(size <= 100) display(m);
+	save(m);
 	// [
 	//   [ 3,  6, 2, 1, 7, 5, 10, 4, 9, 8 ],
 	//   [ 4, 8, 9, 7, 5, 10, 2, 6, 3, 1 ],
