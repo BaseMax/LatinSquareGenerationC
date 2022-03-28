@@ -21,23 +21,22 @@ void reverse(int *arr, int size)
 	}
 }
 
-int* balance(int* members, int size, int participantId)
+int* balance(int* members, int size, int shift)
 {
 	int* result = malloc(sizeof(int) * size);
 	for(int i = 0, j = 0, h = 0; i < size; ++i) {
-		int val = 0;
-		if (i < 2 || i % 2 != 0)
+		int val, idx;
+		if(i < 2 || i % 2 != 0)
 			val = j++;
 		else {
 			val = size - h - 1;
 			++h;
 		}
-
-		int idx = (val + participantId) % size;
+		idx = (val + shift) % size;
 		result[i] = members[idx];
 	}
 
-	if(size % 2 != 0 && participantId % 2 != 0)
+	if(size % 2 != 0 && shift % 2 != 0)
 		reverse(result, size);
 	return result;
 }
@@ -80,22 +79,33 @@ mymatrix* latinSquare(int size)
 
 void display(mymatrix *m)
 {
-	// printf("[\n");
+	printf("[\n");
 	for(int y=0; y < m->y; y++) {
-		// printf("\t[ ");
+		printf("\t[ ");
 		for(int x=0; x < m->x; x++)
-			// printf("%d, ", m->data[y][x]);
+			printf("%d, ", m->data[y][x]);
+			// printf("%d\t", m->data[y][x]);
+		printf("\t],\n");
+		// printf("\n");
+	}
+	printf("]\n");
+}
+
+void display_tab(mymatrix *m)
+{
+	for(int y=0; y < m->y; y++) {
+		for(int x=0; x < m->x; x++)
 			printf("%d\t", m->data[y][x]);
-		// printf("\t],\n");
 		printf("\n");
 	}
-	// printf("]\n");
 }
 
 void save(mymatrix *m)
 {
-	// create "latinSquare.csv" file
-	FILE *fp = fopen("latinSquare.csv", "w");
+	// create "latinSquare-{m->x}.csv" file
+	char filename[100];
+	sprintf(filename, "latinSquare-%d.csv", m->x);
+	FILE *fp = fopen(filename, "w");
 	if(fp == NULL) {
 		printf("Error creating file!\n");
 		exit(1);
@@ -117,7 +127,7 @@ int main(int argc, char** argv)
 	int size = 10; // 1073741824;
 	if(argc > 1) sscanf(argv[1], "%d", &size);
 	mymatrix *m = latinSquare(size);
-	if(size <= 100) display(m);
+	if(size <= 100) display(m); // display_tab(m);
 	save(m);
 	// [
 	//   [ 3,  6, 2, 1, 7, 5, 10, 4, 9, 8 ],
