@@ -3,7 +3,6 @@
 // "Bradley, J. V. Complete counterbalancing of immediate sequential effects in a Latin square design. J. Amer. Statist. Ass.,.1958, 53, 525-528."
 // 2022/03/29
 
-#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -15,15 +14,14 @@ typedef struct {
 
 void reverse(int *arr, int size)
 {
-    for (int i = 0; i < size/2; i++)
-    {
-        int temp = arr[i];
-        arr[i] = arr[size - 1 - i];
-        arr[size - 1 - i] = temp;
-    }
+	for(int i = 0; i < size/2; i++) {
+		int temp = arr[i];
+		arr[i] = arr[size - 1 - i];
+		arr[size - 1 - i] = temp;
+	}
 }
 
-int* balancedLatinSquare(int* members, int size, int participantId)
+int* balance(int* members, int size, int participantId)
 {
 	int* result = malloc(sizeof(int) * size);
 	for(int i = 0, j = 0, h = 0; i < size; ++i) {
@@ -60,7 +58,7 @@ void matrixInit(mymatrix *m)
 	}
 }
 
-mymatrix* generateDefaultLatinSquare(int size)
+mymatrix* latinSquare(int size)
 {
 	mymatrix *lSquare = malloc(sizeof(mymatrix) * 1);
 	lSquare->x = size;
@@ -73,7 +71,7 @@ mymatrix* generateDefaultLatinSquare(int size)
 			conditions[i-1] = i;
 		lSquare->data[0] = conditions;
 		for(int r = 0; r < size; r++) {
-			lSquare->data[r] = balancedLatinSquare(conditions, size, r);
+			lSquare->data[r] = balance(conditions, size, r);
 		}
 	}
 	return lSquare;
@@ -97,7 +95,7 @@ int main(int argc, char** argv)
 {
 	int size = 10; // 1073741824;
 	if(argc > 1) sscanf(argv[1], "%d", &size);
-	mymatrix *m = generateDefaultLatinSquare(size);
+	mymatrix *m = latinSquare(size);
 	display(m);
 	// [
 	//   [ 3,  6, 2, 1, 7, 5, 10, 4, 9, 8 ],
