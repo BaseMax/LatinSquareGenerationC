@@ -9,7 +9,7 @@ $ gcc LatinSquare.c -o latin
 $ ./latin
 ```
 
-### Generate a latin square in order n
+### Generate a latin square in order `N`
 
 ```
 $ ./latin 54
