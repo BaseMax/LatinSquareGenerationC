@@ -45,7 +45,7 @@ int* balance(int* members, int size, int shift)
 
 int isValidSize(int n)
 {
-	return (n % 1 == 0) && n > 0 ;
+	return (n % 1 == 0) && n > 0;
 }
 
 void matrixInit(mymatrix *m)
