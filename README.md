@@ -18,4 +18,8 @@ $ ./latin 4712
 ...
 ```
 
+### Sources
+
+Bradley, J. V. Complete counterbalancing of immediate sequential effects in a Latin square design. J. Amer. Statist. Ass.,.1958, 53, 525-528.
+
 © Copyright 2022, Max Base
