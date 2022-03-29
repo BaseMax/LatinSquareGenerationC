@@ -1,7 +1,9 @@
-// LatinSquareGenerationC
-// Max Base
-// "Bradley, J. V. Complete counterbalancing of immediate sequential effects in a Latin square design. J. Amer. Statist. Ass.,.1958, 53, 525-528."
-// 2022/03/29
+/*
+ * @Name: Latin Square Generation C
+ * @Repository: https://github.com/BaseMax/LatinSquareGenerationC
+ * @Author: Max Base
+ * @Date: 2022/03/29
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
